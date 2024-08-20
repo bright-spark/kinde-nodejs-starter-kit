@@ -267,3 +267,45 @@ app.get('/logout', (req, res) => {
 app.listen(port, () => {
   console.log(`Kinde NodeJS Starter Kit listening on port ${port}!`);
 });
+
+// Function to render and generate files
+async function renderAndGenerateFiles(params) {
+  try {
+      for (const templateInfo of templates) {
+          const renderedContent = await ejs.renderFile(
+              path.join(viewsDirectory, templateInfo.template),
+              params
+          );
+          fs.writeFileSync(path.join(outputDir, templateInfo.output), renderedContent);
+
+          // Copying files to public directory
+          const outputPath = path.join(outputDir, templateInfo.output);
+          const publicPath = path.join(publicDir, templateInfo.output);
+
+          if (fs.existsSync(publicPath)) {
+              fs.unlinkSync(publicPath);
+          }
+          fs.copyFileSync(outputPath, publicPath);
+      }
+  } catch (err) {
+      throw new Error('Error during template rendering and file generation: ' + err.message);
+  }
+}
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
