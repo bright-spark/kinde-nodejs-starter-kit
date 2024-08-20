@@ -196,6 +196,7 @@ app.get('/get-token-view',isAuthenticated(kindeClient), async (req, res) => {
   })
 });
 
+/*
 app.get('/', async (req, res) => {
   const isAuthenticated = await kindeClient.isAuthenticated(req);
   if (isAuthenticated) {
@@ -207,6 +208,7 @@ app.get('/', async (req, res) => {
     });
   }
 });
+*/
 
 app.get('/admin', isAuthenticated(kindeClient), (req, res) => {
   res.render('admin', {
