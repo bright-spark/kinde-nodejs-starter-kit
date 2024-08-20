@@ -7,7 +7,6 @@ const logger = require('morgan');
 const fs = require('fs');
 const fse = require('fs-extra');
 const ejs = require('ejs');
-const { get } = require('http');
 const bodyParser = require('body-parser');
 const { GrantType, KindeClient } = require('@kinde-oss/kinde-nodejs-sdk');
 const { isAuthenticated } = require('./middlewares/isAuthenticated');
@@ -22,8 +21,6 @@ const options = {
   postLoginRedirectUri: process.env.KINDE_POST_LOGIN_REDIRECT_URI || '',
   logoutRedirectUri: process.env.KINDE_LOGOUT_REDIRECT_URI || '',
   grantType: GrantType.PKCE,
-  // scope: 'openid offline profile email'
-  // audience: 'https://example.com/api'
 };
 const kindeClient = new KindeClient(options);
 
@@ -77,7 +74,6 @@ app.get('/', async (req, res) => {
       });
     }
   } catch (error) {
-    // Handle errors here
     console.error(error);
     res.status(500).send('Internal Server Error');
   }
@@ -87,27 +83,21 @@ app.get('/login', kindeClient.login(), (req, res) => {
   return res.redirect('/admin');
 });
 
-/*
 app.get('/callback', kindeClient.callback(), async (req, res) => {
-  return res.redirect('/admin');
+  res.redirect('/admin');
 });
-*/
 
-app.get('/callback', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'app.html'));
-  });
-  
-  app.get('/build', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'build.html'));
-  });
-  
-  app.get('/dash', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'dash.html'));
-  });
-  
-  app.get('/embed', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'embed.html'));
-  });
+app.get('/build', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'build.html'));
+});
+
+app.get('/dash', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dash.html'));
+});
+
+app.get('/embed', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'embed.html'));
+});
 
 app.get('/register', kindeClient.register(), (req, res) => {
   return res.redirect('/admin');
@@ -117,7 +107,13 @@ app.get('/createOrg', kindeClient.createOrg(), (req, res) => {
   return res.redirect('/admin');
 });
 
-app.get('/logout', kindeClient.logout());
+app.get('/logout', (req, res) => {
+  kindeClient.logout();
+  res.render('logout', {
+    title: 'Logout',
+    user: kindeClient.getUserDetails(req),
+  });
+});
 
 app.get('/helper-functions', isAuthenticated(kindeClient), (req, res) => {
   res.render('helper_functions',{
@@ -138,7 +134,7 @@ app.get('/get-claim-view',isAuthenticated(kindeClient), (req, res) => {
   res.render('get_claim',{
     user: kindeClient.getUserDetails(req),
     resultGetClaim: JSON.stringify(result)
-  })
+  });
 });
 
 app.get('/get-flag-view',isAuthenticated(kindeClient), (req, res) => {
@@ -146,20 +142,20 @@ app.get('/get-flag-view',isAuthenticated(kindeClient), (req, res) => {
   res.render('get_flag',{
     user: kindeClient.getUserDetails(req),
     resultGetFlag: JSON.stringify(result),
-  })
+  });
 });
 
 app.get('/get-permissions-view',isAuthenticated(kindeClient), (req, res) => {
   res.render('get_permissions',{
     user: kindeClient.getUserDetails(req),
     resultGetPermissions: JSON.stringify(kindeClient.getPermissions(req))
-  })
+  });
 });
 
 app.get('/get-permission-view',isAuthenticated(kindeClient), (req, res) => {
   res.render('get_permission',{
     user: kindeClient.getUserDetails(req),
-  })
+  });
 });
 
 app.post('/get-permission', isAuthenticated(kindeClient), (req, res) => {
@@ -178,14 +174,14 @@ app.get('/get-organization-view',isAuthenticated(kindeClient), (req, res) => {
   res.render('get_organization',{
     user: kindeClient.getUserDetails(req),
     resultGetOrganization: JSON.stringify(kindeClient.getOrganization(req))
-  })
+  });
 });
 
 app.get('/get-user-organization-view',isAuthenticated(kindeClient), (req, res) => {
   res.render('get_user_organizations',{
     user: kindeClient.getUserDetails(req),
     resultGetUserOrganizations: JSON.stringify(kindeClient.getUserOrganizations(req))
-  })
+  });
 });
 
 app.get('/get-token-view',isAuthenticated(kindeClient), async (req, res) => {
@@ -193,27 +189,6 @@ app.get('/get-token-view',isAuthenticated(kindeClient), async (req, res) => {
   res.render('get_token',{
     user: kindeClient.getUserDetails(req),
     resultGetToken: token
-  })
-});
-
-/*
-app.get('/', async (req, res) => {
-  const isAuthenticated = await kindeClient.isAuthenticated(req);
-  if (isAuthenticated) {
-      res.redirect('/admin');
-  } else {
-    res.render('index', {
-      title: 'Hey',
-      message: 'Hello there! what would you like to do?',
-    });
-  }
-});
-*/
-
-app.get('/admin', isAuthenticated(kindeClient), (req, res) => {
-  res.render('admin', {
-    title: 'Admin',
-    user: kindeClient.getUserDetails(req),
   });
 });
 
@@ -221,32 +196,31 @@ app.get('/admin', isAuthenticated(kindeClient), (req, res) => {
 app.post('/generate', async (req, res) => {
     try {
         await renderAndGenerateFiles(req.body);
-          res.status(200).send('Files generated successfully.');
+        res.status(200).send('Files generated successfully.');
     } catch (err) {
+        console.error('Error during file generation:', err);
         res.status(500).send('Error during file generation: ' + err.message);
     }
 });
 
 app.get('/reset', async (req, res) => {
-
     const srcDir = `./reset/`;
     const destDir = `./public/`;
-                                    
+
     try {
-      fse.copySync(srcDir, destDir, { overwrite: true })
-      console.log('App reset to default successfully.')
+      fse.copySync(srcDir, destDir, { overwrite: true });
+      console.log('App reset to default successfully.');
       res.setHeader('content-type', 'text/html');
       res.end(
         `<script>window.open('/app', '_parent');</script>`
       );
     } catch (err) {
-      console.error(err)
+      console.error(err);
       res.status(500).send('Error during reset to default: ' + err.message);
     }
 });
 
 app.get('/refresh', (req, res) => {
-  // Send a response with JavaScript code to refresh the page
   res.sendFile(path.join(__dirname, 'public', 'app.html'));
 });
 
@@ -255,14 +229,7 @@ app.get('/logout-redirect', (req, res) => {
     title: 'Logout',
     user: kindeClient.getUserDetails(req),
   });
-})
-
-app.get('/logout', (req, res) => {
-  res.render('logout', {
-    title: 'Logout',
-    user: kindeClient.getUserDetails(req),
-  });
-})
+});
 
 app.listen(port, () => {
   console.log(`Kinde NodeJS Starter Kit listening on port ${port}!`);
@@ -299,11 +266,9 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
