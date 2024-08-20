@@ -1,13 +1,5 @@
 require('dotenv').config();
-const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const fs = require('fs');
-const fse = require('fs-extra');
-const ejs = require('ejs');
-const { get } = require('http');
 const bodyParser = require('body-parser');
 const { GrantType, KindeClient } = require('@kinde-oss/kinde-nodejs-sdk');
 const { isAuthenticated } = require('./middlewares/isAuthenticated');
@@ -32,82 +24,13 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Directories
-const outputDir = path.join(__dirname, 'output');
-const publicDir = path.join(__dirname, 'public');
-const viewsDirectory = path.join(__dirname, 'views');
-
-// Ensure output directory exists
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir);
-}
-
-// Templates to be rendered
-const templates = [
-  { template: 'app.ejs', output: 'app.html' },
-  { template: 'manifest.ejs', output: 'manifest.json' },
-  { template: 'script.ejs', output: 'script.js' },
-  { template: 'style.ejs', output: 'style.css' }
-];
-
-app.get('/app', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'app.html'));
-});
-
-app.get('/hello', (req, res) => {
-  const responseData = { message: 'Hello from the server!' };
-  res.json(responseData);
-});
-
-app.get('/', async (req, res) => {
-  try {
-    const isAuthenticated = await kindeClient.isAuthenticated(req);
-    if (isAuthenticated) {
-      res.redirect('/admin');
-    } else {
-      res.render('index', {
-        title: 'Hey',
-        message: 'Hello there! What would you like to do?',
-      });
-    }
-  } catch (error) {
-    // Handle errors here
-    console.error(error);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
 app.get('/login', kindeClient.login(), (req, res) => {
   return res.redirect('/admin');
 });
 
-/*
 app.get('/callback', kindeClient.callback(), async (req, res) => {
   return res.redirect('/admin');
 });
-*/
-
-app.get('/callback', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'app.html'));
-  });
-  
-  app.get('/build', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'build.html'));
-  });
-  
-  app.get('/dash', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'dash.html'));
-  });
-  
-  app.get('/embed', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'embed.html'));
-  });
 
 app.get('/register', kindeClient.register(), (req, res) => {
   return res.redirect('/admin');
@@ -214,53 +137,6 @@ app.get('/admin', isAuthenticated(kindeClient), (req, res) => {
     user: kindeClient.getUserDetails(req),
   });
 });
-
-// API endpoint to generate files
-app.post('/generate', async (req, res) => {
-    try {
-        await renderAndGenerateFiles(req.body);
-          res.status(200).send('Files generated successfully.');
-    } catch (err) {
-        res.status(500).send('Error during file generation: ' + err.message);
-    }
-});
-
-app.get('/reset', async (req, res) => {
-
-    const srcDir = `./reset/`;
-    const destDir = `./public/`;
-                                    
-    try {
-      fse.copySync(srcDir, destDir, { overwrite: true })
-      console.log('App reset to default successfully.')
-      res.setHeader('content-type', 'text/html');
-      res.end(
-        `<script>window.open('/app', '_parent');</script>`
-      );
-    } catch (err) {
-      console.error(err)
-      res.status(500).send('Error during reset to default: ' + err.message);
-    }
-});
-
-app.get('/refresh', (req, res) => {
-  // Send a response with JavaScript code to refresh the page
-  res.sendFile(path.join(__dirname, 'public', 'app.html'));
-});
-
-app.get('/logout-redirect', (req, res) => {
-  res.render('logout_redirect', {
-    title: 'Logout',
-    user: kindeClient.getUserDetails(req),
-  });
-})
-
-app.get('/logout', (req, res) => {
-  res.render('logout', {
-    title: 'Logout',
-    user: kindeClient.getUserDetails(req),
-  });
-})
 
 app.listen(port, () => {
   console.log(`Kinde NodeJS Starter Kit listening on port ${port}!`);

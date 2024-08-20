@@ -1,4 +1,3 @@
-require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -9,17 +8,21 @@ const fse = require('fs-extra');
 const ejs = require('ejs');
 const { get } = require('http');
 const bodyParser = require('body-parser');
-const { GrantType, KindeClient } = require('@kinde-oss/kinde-nodejs-sdk');
-const { isAuthenticated } = require('./middlewares/isAuthenticated');
+
+
 
 const app = express();
-const port = 3000;
+
+require("dotenv").config();
+
+const {KindeClient, GrantType} = require("@kinde-oss/kinde-nodejs-sdk");
+const { isAuthenticated } = require('./middlewares/isAuthenticated');
+
 const options = {
   domain: process.env.KINDE_DOMAIN,
   clientId: process.env.KINDE_CLIENT_ID,
   clientSecret: process.env.KINDE_CLIENT_SECRET,
   redirectUri: process.env.KINDE_REDIRECT_URI,
-  postLoginRedirectUri: process.env.KINDE_POST_LOGIN_REDIRECT_URI || '',
   logoutRedirectUri: process.env.KINDE_LOGOUT_REDIRECT_URI || '',
   grantType: GrantType.PKCE,
   // scope: 'openid offline profile email'
@@ -27,7 +30,6 @@ const options = {
 };
 const kindeClient = new KindeClient(options);
 
-app.use(express.static('public'));
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -87,28 +89,6 @@ app.get('/login', kindeClient.login(), (req, res) => {
   return res.redirect('/admin');
 });
 
-/*
-app.get('/callback', kindeClient.callback(), async (req, res) => {
-  return res.redirect('/admin');
-});
-*/
-
-app.get('/callback', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'app.html'));
-  });
-  
-  app.get('/build', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'build.html'));
-  });
-  
-  app.get('/dash', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'dash.html'));
-  });
-  
-  app.get('/embed', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'embed.html'));
-  });
-
 app.get('/register', kindeClient.register(), (req, res) => {
   return res.redirect('/admin');
 });
@@ -116,8 +96,6 @@ app.get('/register', kindeClient.register(), (req, res) => {
 app.get('/createOrg', kindeClient.createOrg(), (req, res) => {
   return res.redirect('/admin');
 });
-
-app.get('/logout', kindeClient.logout());
 
 app.get('/helper-functions', isAuthenticated(kindeClient), (req, res) => {
   res.render('helper_functions',{
@@ -196,16 +174,26 @@ app.get('/get-token-view',isAuthenticated(kindeClient), async (req, res) => {
   })
 });
 
-app.get('/', async (req, res) => {
-  const isAuthenticated = await kindeClient.isAuthenticated(req);
-  if (isAuthenticated) {
-      res.redirect('/admin');
-  } else {
-    res.render('index', {
-      title: 'Hey',
-      message: 'Hello there! what would you like to do?',
-    });
-  }
+/*
+app.get('/callback', kindeClient.callback(), async (req, res) => {
+  return res.redirect('/admin');
+});
+*/
+
+app.get('/callback', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'app.html'));
+});
+
+app.get('/build', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'build.html'));
+});
+
+app.get('/dash', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'dash.html'));
+});
+
+app.get('/embed', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'embed.html'));
 });
 
 app.get('/admin', isAuthenticated(kindeClient), (req, res) => {
@@ -262,6 +250,52 @@ app.get('/logout', (req, res) => {
   });
 })
 
-app.listen(port, () => {
-  console.log(`Kinde NodeJS Starter Kit listening on port ${port}!`);
+app.get('/register', (req, res) => {
+  res.render('register', {
+    title: 'Register',
+    user: kindeClient.getUserDetails(req),
+  });
+})
+
+
+// Function to render and generate files
+async function renderAndGenerateFiles(params) {
+    try {
+        for (const templateInfo of templates) {
+            const renderedContent = await ejs.renderFile(
+                path.join(viewsDirectory, templateInfo.template),
+                params
+            );
+            fs.writeFileSync(path.join(outputDir, templateInfo.output), renderedContent);
+
+            // Copying files to public directory
+            const outputPath = path.join(outputDir, templateInfo.output);
+            const publicPath = path.join(publicDir, templateInfo.output);
+
+            if (fs.existsSync(publicPath)) {
+                fs.unlinkSync(publicPath);
+            }
+            fs.copyFileSync(outputPath, publicPath);
+        }
+    } catch (err) {
+        throw new Error('Error during template rendering and file generation: ' + err.message);
+    }
+}
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    next(createError(404));
 });
+  
+// error handler
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
+
+module.exports = app;
