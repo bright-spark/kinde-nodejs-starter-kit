@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VZM1W5ZYTJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-VZM1W5ZYTJ');
+    </script>
+
+    <title>Invent in Red</title>
+
+    <link rel="canonical" href="https://inventedinred.com" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #161c30;
+            font-family: 'Arial', sans-serif;
+            padding: 5% 10%;
+        }
+
+        .container {
+            background: #ffe0e0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-top: 40px;
+        }
+
+        h1 {
+            color: #050a30;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #050a30;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #050a30;
+        }
+
+        .btn-primary {
+            background-color: #050a30;
+            border-color: #050a30;
+        }
+
+        .btn-primary:hover {
+            background-color: #050a30a8;
+            border-color: #050a30a8;
+        }
+
+        .form-control {
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Gooey Parameters</h2>
+        <form id="parameterForm">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" value="Invent in Red" required>
+            </div>
+            <div class="form-group">
+                <label for="statusbar">Status Bar Option:</label>
+                <select class="form-control" id="statusbar" name="statusbar" value="black">
+                    <option value="black">Black</option>
+                    <option value="black-translucent">Black Translucent</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ogurl">OG URL:</label>
+                <input type="url" class="form-control" id="ogurl" name="ogurl" value="https://chili.redbuilder.dev"
+                    required pattern="https?://.+">
+            </div>
+            <div class="form-group">
+                <label for="ogtitle">OG Title:</label>
+                <input type="text" class="form-control" id="ogtitle" name="ogtitle" value="Invent in Red" required>
+            </div>
+            <div class="form-group">
+                <label for="ogdescription">OG Description:</label>
+                <input type="text" class="form-control" id="ogdescription" name="ogdescription"
+                    value="Hot like chili 🌶️ cool as ice" required>
+            </div>
+            <div class="form-group">
+                <label for="ogsitename">OG Site Name:</label>
+                <input type="text" class="form-control" id="ogsitename" name="ogsitename" value="Invent in Red"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="keywords">Keywords:</label>
+                <input type="text" class="form-control" id="keywords" name="keywords"
+                    value="Audio, Music, Video, Playlist, Streaming, Online, Best, Popular, Deezer, Spotify, YouTubeMusic, YouTube, Playlist, Free, PWA, Apple, Android, iOS, Windows, Podcast, Vibescout, Event, Social"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" class="form-control" id="subject" name="subject" value="Invent in Red" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" class="form-control" id="description" name="description"
+                    value="Welcome to the Invent in Red Builder, your ultimate destination for unlimited entertainment and socializing! Our free app offers a seamless and anonymous experience for users of all ages. With no login required, you can instantly enjoy our handpicked playlists, live radio, and interactive chat features. Plus, we're excited to announce that theradio.fm now features a 100% free ChatGPT client called ZapGPT, developed by tinkerAI on the Zapier platform. Keep up with your favorite artists and radio hosts, or challenge your friends to our exciting games. And with our app directory, discovering new apps and features has never been easier! At theradio.fm, we prioritize your privacy and strive to offer a fun and engaging experience without the hassle of ads and interruptions. So why wait? Download the app now and explore all the incredible features that await you!"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="frame1url">Page 1 URL:</label>
+                <input type="text" class="form-control" id="frame1url" name="frame1url" value="https://redbuilder.dev"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="frame2url">Page 2 URL:</label>
+                <input type="text" class="form-control" id="frame2url" name="frame2url"
+                    value="https://www.canva.com/design/DAF2E2zqxEw/view" required>
+            </div>
+            <div class="form-group">
+                <label for="frame3url">Page 3 URL:</label>
+                <input type="text" class="form-control" id="frame3url" name="frame3url"
+                    value="https://www.canva.com/design/DAF2_pyrqh0/watch" required>
+            </div>
+            <div class="form-group">
+                <label for="frame4url">Page 4 URL:</label>
+                <input type="text" class="form-control" id="frame4url" name="frame4url" value="https://yt.xxlxx.co/rnd"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="frame5url">Page 5 URL:</label>
+                <input type="text" class="form-control" id="frame5url" name="frame5url" value="/dash.html" required>
+            </div>
+            <div class="form-group">
+                <label for="bgcolour1">Background Color 1:</label>
+                <input type="color" class="form-control" id="bgcolour1" name="bgcolour1" value="#ff1c1c" required>
+            </div>
+            <div class="form-group">
+                <label for="bgcolour2">Background Color 2:</label>
+                <input type="color" class="form-control" id="bgcolour2" name="bgcolour2" value="#ff1c1c" required>
+            </div>
+            <div class="form-group">
+                <label for="bgcolour3">Background Color 3:</label>
+                <input type="color" class="form-control" id="bgcolour3" name="bgcolour3" value="#ff1c1c" required>
+            </div>
+            <div class="form-group">
+                <label for="bgcolour4">Background Color 4:</label>
+                <input type="color" class="form-control" id="bgcolour4" name="bgcolour4" value="#ff1c1c" required>
+            </div>
+            <div class="form-group">
+                <label for="bgcolour5">Background Color 5:</label>
+                <input type="color" class="form-control" id="bgcolour5" name="bgcolour5" value="#ff1c1c" required>
+            </div>
+            <div class="form-group">
+                <label for="bgmenu">Background Menu Color:</label>
+                <input type="color" class="form-control" id="bgmenu" name="bgmenu" value="#1d1d27" required>
+            </div>
+            <div class="form-group">
+                <label for="stroke">Stroke:</label>
+                <input type="color" class="form-control" id="stroke" name="stroke" value="#ffffff" required>
+            </div>
+            <div class="form-group">
+                <label for="bodybgcolor">Body Background Color:</label>
+                <input type="color" class="form-control" id="bodybgcolor" name="bodybgcolor" value="#1d1d27" required>
+            </div>
+            <div class="form-group">
+                <label for="bodycolor">Body Color:</label>
+                <input type="color" class="form-control" id="bodycolor" name="bodycolor" value="#ce0000" required>
+            </div>
+            <div class="form-group">
+                <label for="statusbgcolor">Status Background Color:</label>
+                <input type="color" class="form-control" id="statusbgcolor" name="statusbgcolor" value="#1d1d27"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="statuscolor">Status Color:</label>
+                <input type="color" class="form-control" id="statuscolor" name="statuscolor" value="#ce0000" required>
+            </div>
+            <div class="form-group">
+                <label for="pwaname">PWA Name:</label>
+                <input type="text" class="form-control" id="pwaname" name="pwaname" value="Invent in Red" required>
+            </div>
+            <div class="form-group">
+                <label for="pwashortname">PWA Short Name:</label>
+                <input type="text" class="form-control" id="pwashortname" name="pwashortname" value="Chili 🌶️"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="pwadescription">PWA Description:</label>
+                <input type="text" class="form-control" id="pwadescription" name="pwadescription"
+                    value="Welcome to the Invent in Red Builder - Invent in Red, your ultimate destination for unlimited entertainment and socializing! Our free app offers a seamless and anonymous experience for users of all ages. With no login required, you can instantly enjoy our handpicked playlists, live radio, and interactive chat features. Plus, we're excited to announce that theradio.fm now features a 100% free ChatGPT client called ZapGPT, developed by tinkerAI on the Zapier platform. Keep up with your favorite artists and radio hosts, or challenge your friends to our exciting games. And with our app directory, discovering new apps and features has never been easier! At theradio.fm, we prioritize your privacy and strive to offer a fun and engaging experience without the hassle of ads and interruptions. So why wait? Download the app now and explore all the incredible features that await you!"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="pwatheme">PWA Theme Color:</label>
+                <input type="color" class="form-control" id="pwatheme" name="pwatheme" value="#ce0000" required>
+            </div>
+            <div class="form-group">
+                <label for="pwabackground">PWA Background Color:</label>
+                <input type="color" class="form-control" id="pwabackground" name="pwabackground" value="#1d1d27"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="pwadisplay">PWA Display:</label>
+                <select class="form-control" id="pwadisplay" name="pwadisplay" value="standalone" required>
+                    <option value="standalone">Standalone</option>
+                    <option value="fullscreen">Fullscreen</option>
+                    <option value="minimal-ui">Minimal UI</option>
+                    <option value="browser">Browser</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pwaorientation">PWA Orientation:</label>
+                <select class="form-control" id="pwaorientation" name="pwaorientation" value="portrait" required>
+                    <option value="portrait">Portrait</option>
+                    <option value="portrait-primary">Portrait Primary</option>
+                    <option value="portrait-secondary">Portrait Secondary</option>
+                    <option value="landscape">Landscape</option>
+                    <option value="landscape-primary">Landscape Primary</option>
+                    <option value="landscape-secondary">Landscape Secondary</option>
+                    <option value="natural">Natural</option>
+                    <option value="any">Any</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pwastarturl">PWA Start URL:</label>
+                <input type="text" class="form-control" id="pwastarturl" name="pwastarturl" value="/" required>
+            </div>
+            <div class="form-group">
+                <label for="pwanavigation">PWA Navigation:</label>
+                <select class="form-control" id="pwanavigation" name="pwanavigation" value="standalone" required>
+                    <option value="standalone">Standalone</option>
+                    <option value="minimal-ui">Minimal UI</option>
+                    <option value="browser">Browser</option>
+                    <option value="fullscreen">Fullscreen</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="androidid">Android ID:</label>
+                <input type="text" class="form-control" id="androidid" name="androidid" value="com.canva.editor"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="pwashortcuts">PWA Shortcuts:</label>
+                <input type="text" class="form-control" id="pwashortcuts" name="pwashortcuts" value="">
+            </div>
+            <div class="form-group">
+                <label for="pwadisplayoverride">PWA Display Override:</label>
+                <input type="text" class="form-control" id="pwadisplayoverride" name="pwadisplayoverride"
+                    value="fullscreen" required>
+            </div>
+            <div class="form-group">
+                <label for="pwacategories">PWA Categories:</label>
+                <input type="text" class="form-control" id="pwacategories" name="pwacategories" value="lifestyle"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="pwascopes">PWA Scopes:</label>
+                <input type="text" class="form-control" id="pwascopes" name="pwascopes" value="/" required>
+            </div>
+            <div class="form-group">
+                <label for="pwaicons">PWA Icons:</label>
+                <input type="text" class="form-control" id="pwaicons" name="pwaicons" value="icons/icon.png" required>
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Generate</button>
+            </div>
+
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="build.js"></script>
+    <script>
+        document.getElementById('launchButton').addEventListener('click', function () {
+            // Define the base URL
+            var baseUrl = '/app';
+
+            // Open the base URL in a new tab or window
+            //window.open(baseUrl, '_blank');
+            window.open(baseUrl, '_parent');
+
+            // Replace the current window's content with the new URL
+            //window.location.href = baseUrl;
+
+            // This will reload the same URL
+            // window.location.reload();
+        });
+    </script>
+</body>
+
+</html>

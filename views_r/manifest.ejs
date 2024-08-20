@@ -1,0 +1,189 @@
+{
+  "name": "<%= pwaname %>",
+  "short_name": "<%= pwashortname %>",
+  "description": "<%= pwadescription %>",
+  "start_url": "<%= pwastarturl %>",
+  "display": "<%= pwadisplay %>",
+  "orientation": "<%= pwaorientation %>",
+  "theme_color": "<%= pwatheme %>",
+  "background_color": "<%= pwabackground %>",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=<%= androidid %>"
+    }
+  ],
+  "prefer_related_applications": true,
+  "pwanavigation": "<%= pwanavigation %>",  
+  "dir": "ltr",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "<%= pwaicons %>",
+      "sizes": "192x192"
+    },
+    {
+      "src": "<%= pwaicons %>",
+      "sizes": "512x512"
+    }
+  ],
+  "scope": "<%= pwascopes %>",
+  "splash_pages": null,
+  "screenshots": [],
+  "share_target": {
+    "action": "/share-target",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded"
+  },
+  "share_target": {
+    "action": "/share-target",
+    "method": "GET",
+    "params": {
+      "title": "Gooey",
+      "text": "A real gooey kind of app",
+      "url": "https://gooey.canva.com",
+      "files": [
+        "image/*"
+      ],
+      "type": "webapplikation / app",
+      "target": "https://gooey.canva.com/share-target"
+    },
+    "enctype": "application/x-www-form-urlencoded"
+  },
+  "shortcuts": [
+    {
+      "name": "Home",
+      "url": "/",
+      "description": "Go to the home page."
+    },
+    {
+      "name": "Build",
+      "url": "/build.html",
+      "description": "Build another version of the app."
+    },
+    {
+      "name": "Reset",
+      "url": "/reset",
+      "description": "Reset the app to build state."
+    },
+    {
+      "name": "Register",
+      "url": "/register",
+      "description": "Go to the register page."
+    },
+    {
+      "name": "Login",
+      "url": "/login",
+      "description": "Go to the login page."
+    },
+    {
+      "name": "Logout",
+      "url": "/logout",
+      "description": "Go to the logout page."
+    },
+    {
+      "name": "Forgot",
+      "url": "/forgot",
+      "description": "Go to the forgot page."
+    },
+    {
+      "name": "Account",
+      "url": "/account",
+      "description": "Go to the account page."
+    },
+    {
+      "name": "Profile",
+      "url": "/profile",
+      "description": "Go to the profile page."
+    },
+    {
+      "name": "Dashboard",
+      "url": "/dashboard",
+      "description": "Go to the dashboard page."
+    },
+    {
+      "name": "Admin",
+      "url": "/admin",
+      "description": "Go to the admin page."
+    },
+    {
+      "name": "Settings",
+      "url": "/settings",
+      "description": "Go to the settings page."
+    },
+    {
+      "name": "Contact",
+      "url": "/contact",
+      "description": "Go to the contact page."
+    },
+    {
+      "name": "Privacy",
+      "url": "/privacy",
+      "description": "Go to the privacy page."
+    },
+    {
+      "name": "Terms",
+      "url": "/terms",
+      "description": "Go to the terms page."
+    },
+    {
+      "name": "Help",
+      "url": "/help",
+      "description": "Go to the help page."
+    }
+  ],
+  "shortcuts_enabled": [
+    {
+      "name": "Home",
+      "url": "/",
+      "description": "Go to the home page."
+    },
+    {
+      "name": "Register",
+      "url": "/register",
+      "description": "Go to the register page."
+    },
+    {
+      "name": "Contact",
+      "url": "/contact",
+      "description": "Go to the contact page."
+    },
+    {
+      "name": "Privacy",
+      "url": "/privacy",
+      "description": "Go to the privacy page."
+    },
+    {
+      "name": "Terms",
+      "url": "/terms",
+      "description": "Go to the terms page."
+    },
+    {
+      "name": "Help",
+      "url": "/help",
+      "description": "Go to the help page."
+    }
+  ],
+  "shortcuts_hidden": [
+    {
+      "name": "Build",
+      "url": "/build.html",
+      "description": "Build another version of the app."
+    },
+    {
+      "name": "Reset",
+      "url": "/reset",
+      "description": "Reset the app to build state."
+    }
+  ],
+  "display_override": [
+    "<%= pwadisplayoverride %>"
+  ],
+  "categories": [
+    "<%= pwacategories %>"
+  ],
+  "serviceworker": {
+    "src": "/sw.js",
+    "scope": "<%= pwascopes %>"
+  }
+}

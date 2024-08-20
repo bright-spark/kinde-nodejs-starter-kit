@@ -1,7 +1,6 @@
 :root {
   --g-color-black: #000;
   --g-color-white: #fff;
-  --g-color-red: #bb1823;
 
   --g-color-grey-50: #f6f6f6;
   --g-color-grey-600: #636363;
@@ -157,12 +156,6 @@ a {
   font-weight: 600;
 }
 
-.btn-red {
-  background: var(--g-color-white);
-  color: var(--g-color-red);
-  font-weight: 600;
-}
-
 .btn-big {
   font-size: var(--g-font-size-large);
   padding: var(--g-font-size-large) var(--g-font-size-x-large);
@@ -190,17 +183,6 @@ a {
   border-radius: var(--g-border-radius-large);
   box-shadow: var(--g-box-shadow);
   color: var(--g-color-white);
-}
-
-.cover-page {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  text-align: center; 
-  background: var(--g-color-red);
-  color: var(--g-color-white); 
 }
 
 .link {

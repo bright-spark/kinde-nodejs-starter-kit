@@ -1,0 +1,127 @@
+{
+  "name": "Invented in Red",
+  "short_name": "Invent in Red",
+  "description": "Simple progressive web app builder for marketers, agencies, and influencers. Easy to use so invent in red. We are a proud Microsoft startup &amp; partner.",
+  "dir": "ltr",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "theme_color": "#bb1823",
+  "background_color": "#1d1d27",
+  "categories": [
+    "business",
+    "entertainment",
+    "lifestyle",
+    "productivity",
+    "utilities"
+  ],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/icon-256x256.png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Home",
+      "url": "/",
+      "description": "Home"
+    },
+    {
+      "name": "Preview",
+      "url": "/app",
+      "description": "Preview"
+    },
+    {
+      "name": "Privacy",
+      "url": "/privacy",
+      "description": "Privacy"
+    }
+  ],
+  "id": "redbuilder",
+  "lang": "en",
+  "display_override": [
+    "standalone",
+    "fullscreen",
+    "minimal-ui",
+    "browser",
+    "window-controls-overlay"
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.appmysite.custom",
+      "id": "com.appmysite.custom"
+    },
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.appmysite.web",
+      "id": "com.appmysite.web"
+    },
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.appmysite.wordpress",
+      "id": "com.appmysite.wordpress"
+    },
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.appmysite.shop",
+      "id": "com.appmysite.shop"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "mailto",
+      "url": "/mail?to=%s"
+    },
+    {
+      "protocol": "web+inventreset",
+      "url": "/reset"
+    },
+    {
+      "protocol": "web+inventbuild",
+      "url": "/build"
+    },
+    {
+      "protocol": "web+inventpreview",
+      "url": "/app"
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "share_target": {
+    "method": "GET",
+    "action": "/share-receiver",
+    "params": {
+      "title": "Invented in Red",
+      "text": "Invent in Red",
+      "url": "/handle-shared-content/",
+      "files": [
+        {
+          "name": "icon",
+          "accept": ["image/png", "image/jpeg", "image/gif"]
+        },
+        {
+          "name": "title",
+          "accept": ["text/html", "text/plain", "text/uri-list", "text/x-uri"]
+        },
+        {
+          "name": "config",
+          "accept": ["application/json", "text/plain", "text/uri-list", "text/x-uri", "text/html"]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "name": "Invent in Red Builder Invent in Red",
+  "short_name": "Invent in Red",
+  "description": "Invent in Red Builder's ultimate version of theradio.fm – Unleash Your Digital Creativity! In the dynamic world of social media marketing, YouTube content creation, and the music industry, your digital presence is your powerhouse. Invent in Red Builder is here to revolutionize the way you connect with your audience. With our intuitive app builder, anyone can craft stunning, progressive web apps in a snap – no coding skills required! Whether you are an influencer, a musician, or a marketing maven, Invent in Red Builder empowers you to create engaging, professional-grade apps that resonate with your brand and your audience. Dive into the digital era with Invent in Red Builder and transform your online presence into a captivating experience!",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#bb1823",
+  "background_color": "#1d1d27",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.canva.editor"
+    }
+  ],
+  "prefer_related_applications": true,
+  "pwanavigation": "browser",  
+  "dir": "ltr",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icons/icon.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/icon.png",
+      "sizes": "512x512"
+    }
+  ],
+  "scope": "/",
+  "splash_pages": null,
+  "screenshots": [],
+  "share_target": {
+    "action": "/share-target",
+    "method": "GET",
+    "params": {
+      "title": "Gooey",
+      "text": "A real gooey kind of app",
+      "url": "https://gooey.canva.com",
+      "files": [
+        "image/*"
+      ],
+      "type": "webapplikation / app",
+      "target": "https://gooey.canva.com/share-target"
+    },
+    "enctype": "application/x-www-form-urlencoded"
+  },
+  "shortcuts": [
+    {
+      "name": "Home",
+      "url": "/",
+      "description": "Go to the home page."
+    },
+    {
+      "name": "Build",
+      "url": "/build.html",
+      "description": "Build another version of the app."
+    },
+    {
+      "name": "Reset",
+      "url": "/reset",
+      "description": "Reset the app to build state."
+    },
+    {
+      "name": "Register",
+      "url": "/register",
+      "description": "Go to the register page."
+    },
+    {
+      "name": "Login",
+      "url": "/login",
+      "description": "Go to the login page."
+    },
+    {
+      "name": "Logout",
+      "url": "/logout",
+      "description": "Go to the logout page."
+    },
+    {
+      "name": "Forgot",
+      "url": "/forgot",
+      "description": "Go to the forgot page."
+    },
+    {
+      "name": "Account",
+      "url": "/account",
+      "description": "Go to the account page."
+    },
+    {
+      "name": "Profile",
+      "url": "/profile",
+      "description": "Go to the profile page."
+    },
+    {
+      "name": "Dashboard",
+      "url": "/dashboard",
+      "description": "Go to the dashboard page."
+    },
+    {
+      "name": "Admin",
+      "url": "/admin",
+      "description": "Go to the admin page."
+    },
+    {
+      "name": "Settings",
+      "url": "/settings",
+      "description": "Go to the settings page."
+    },
+    {
+      "name": "Contact",
+      "url": "/contact",
+      "description": "Go to the contact page."
+    },
+    {
+      "name": "Privacy",
+      "url": "/privacy",
+      "description": "Go to the privacy page."
+    },
+    {
+      "name": "Terms",
+      "url": "/terms",
+      "description": "Go to the terms page."
+    },
+    {
+      "name": "Help",
+      "url": "/help",
+      "description": "Go to the help page."
+    }
+  ],
+  "shortcuts_enabled": [
+    {
+      "name": "Home",
+      "url": "/",
+      "description": "Go to the home page."
+    },
+    {
+      "name": "Register",
+      "url": "/register",
+      "description": "Go to the register page."
+    },
+    {
+      "name": "Contact",
+      "url": "/contact",
+      "description": "Go to the contact page."
+    },
+    {
+      "name": "Privacy",
+      "url": "/privacy",
+      "description": "Go to the privacy page."
+    },
+    {
+      "name": "Terms",
+      "url": "/terms",
+      "description": "Go to the terms page."
+    },
+    {
+      "name": "Help",
+      "url": "/help",
+      "description": "Go to the help page."
+    }
+  ],
+  "shortcuts_hidden": [
+    {
+      "name": "Build",
+      "url": "/build.html",
+      "description": "Build another version of the app."
+    },
+    {
+      "name": "Reset",
+      "url": "/reset",
+      "description": "Reset the app to build state."
+    }
+  ],
+  "display_override": [
+    "fullscreen"
+  ],
+  "categories": [
+    "lifestyle"
+  ],
+  "serviceworker": {
+    "src": "/sw.js",
+    "scope": "/"
+  }
+}
